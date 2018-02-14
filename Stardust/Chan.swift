@@ -50,7 +50,7 @@ class Chan<T>: Hashable, Equatable {
   }
 
   // block until value becomes nil, set the prop to new value and return
-  // FIXME: do nothing or throw if closed?
+  // FIXME: do nothing or throw if closed? deadlines?
   func write(_ value: T) -> () {
     q.sync {
       if isClosed {
@@ -67,7 +67,7 @@ class Chan<T>: Hashable, Equatable {
 
   // block until value becomes not nil, get the value, set prop back to nil
   // and return it
-  // FIXME: return nil or throw if closed?
+  // FIXME: return nil or throw if closed? deadlines?
   func read() -> T? {
     var v: T? = nil
     q.sync {
