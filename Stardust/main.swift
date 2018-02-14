@@ -11,11 +11,11 @@ import Dispatch
 
 let inp = Chan<Int>()
 
-func worker(_ input: RChan<Int>) -> RChan<BInt> {
-  let out = Chan<BInt>()
+func worker(_ input: RChan<Int>) -> RChan<(Int, BInt)> {
+  let out = Chan<(Int, BInt)>()
   DispatchQueue.global().async {
     while let v = input.read() {
-      out.write(factorial(v))
+      out.write((v, factorial(v)))
     }
   }
   return out.reader
@@ -24,8 +24,8 @@ func worker(_ input: RChan<Int>) -> RChan<BInt> {
 let workers = (0..<4).map { _ in worker(inp.reader) }
 
 DispatchQueue.global().async {
-  select(workers) { (i: BInt) in
-    print(i)
+  select(workers) { i, f in
+    print("factorial(\(i)) is \(f)")
   }
 }
 
