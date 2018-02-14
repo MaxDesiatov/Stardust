@@ -9,14 +9,27 @@
 import Foundation
 import Dispatch
 
-let ch = Channel<Int>(label: "int")
-let bch = Channel<BInt>(label: "big")
+let inp = Chan<Int>()
+
+func worker(_ input: RChan<Int>) -> RChan<BInt> {
+  let out = Chan<BInt>()
+  DispatchQueue.global().async {
+    while let v = input.read() {
+      out.write(factorial(v))
+    }
+  }
+  return out.reader
+}
+
+let workers = (0..<4).map { _ in worker(inp.reader) }
 
 DispatchQueue.global().async {
-  let v = ch.receive()
-  bch.send(factorial(v))
+  select(workers) { (i: BInt) in
+    print(i)
+  }
 }
 
 for i in 1..<100 {
-  ch.send(i)
+  inp.write(i)
 }
+

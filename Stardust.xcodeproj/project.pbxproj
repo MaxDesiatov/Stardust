@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E2593B472034345A0011A1BC /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2593B462034345A0011A1BC /* Channel.swift */; };
+		E2593B472034345A0011A1BC /* Chan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2593B462034345A0011A1BC /* Chan.swift */; };
 		E2593B492034415C0011A1BC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2593B482034415C0011A1BC /* main.swift */; };
 		E2ED95372030769700FADA28 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED95362030769700FADA28 /* Actor.swift */; };
 		E2ED95442030859A00FADA28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED95432030859A00FADA28 /* AppDelegate.swift */; };
@@ -32,7 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E2593B462034345A0011A1BC /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		E2593B462034345A0011A1BC /* Chan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chan.swift; sourceTree = "<group>"; };
 		E2593B482034415C0011A1BC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E2ED95332030769700FADA28 /* Stardust */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Stardust; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2ED95362030769700FADA28 /* Actor.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -89,7 +89,7 @@
 			children = (
 				E2ED9551203086B400FADA28 /* BigNumber.swift */,
 				E2ED95362030769700FADA28 /* Actor.swift */,
-				E2593B462034345A0011A1BC /* Channel.swift */,
+				E2593B462034345A0011A1BC /* Chan.swift */,
 				E2593B482034415C0011A1BC /* main.swift */,
 			);
 			path = Stardust;
@@ -202,7 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2ED95372030769700FADA28 /* Actor.swift in Sources */,
-				E2593B472034345A0011A1BC /* Channel.swift in Sources */,
+				E2593B472034345A0011A1BC /* Chan.swift in Sources */,
 				E2593B492034415C0011A1BC /* main.swift in Sources */,
 				E2ED9553203088FF00FADA28 /* BigNumber.swift in Sources */,
 			);
