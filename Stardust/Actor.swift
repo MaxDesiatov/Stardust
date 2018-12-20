@@ -34,9 +34,82 @@ import Dispatch
 //}
 
 protocol Actor {
-  associatedtype Message
-  func receive(_ message: Message)
+    associatedtype Message
+    associatedtype Props
+    
+    init(_: Props)
+    
+    func receive(message: Message)
 }
+
+protocol AnyRemoteActor {}
+
+protocol RemoteActor: Actor, AnyRemoteActor where Message: Codable, Props: Codable {
+}
+
+extension Actor {
+    func spawn<T: Actor>(_: T.Type, _: T.Props) {
+    }
+}
+
+struct ActorID<T: Actor> {
+    let value: String
+    
+    func send(_ message: T.Message) {
+    }
+}
+
+protocol MapperResponse {
+    associatedtype Value
+    static func response(_: Value) -> Self
+}
+
+struct Mapper<T, U>: Actor where U: Actor, U.Message: MapperResponse {
+    struct Request {
+        let value: T
+        let callback: ActorID<U>
+    }
+    
+    private let map: (T) -> U.Message.Value
+    
+    init(_ map: @escaping (T) -> U.Message.Value) {
+        self.map = map
+    }
+    
+    func receive(message: Request) {
+        let result = U.Message.response(map(message.value))
+        message.callback.send(result)
+    }
+}
+
+struct A: RemoteActor {
+    let i: Int
+    init(_ i: Int) {
+        self.i = i
+    }
+    
+    func receive(message: Int) {
+        
+    }
+}
+
+let t = A.self
+let y: Any = A(5)
+
+func cast<T>(value: Any, to type: T.Type) -> T? {
+    return value as? T
+}
+
+let z = cast(value: y, to: t)
+
+var registered = [Any.Type]()
+
+func register<T: RemoteActor>(remoteActor: T.Type) {
+    registered.append(remoteActor)
+    registered.append(T.Props.self)
+}
+
+register(remoteActor: A.self)
 
 enum Request {
   case request(Int)
